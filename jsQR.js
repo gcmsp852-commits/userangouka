@@ -10323,7 +10323,8 @@ function findAlignmentPattern(matrix, alignmentPatternQuads, topRight, topLeft, 
         var d = distance({ x: x, y: y }, expectedAlignmentPattern);
         // ★ ツインQR対策：予想位置からの距離がごくわずか(1モジュール以内)の場合のみ採用。
         // ツインでは別QRのノイズが非常に多いため、少しでも離れたものを採用すると深刻な歪みが発生する。
-        if (d > moduleSize * 1.2) {
+        // ただし、Ver3のように予想位置が少しでもパース歪みでズレた際に棄却されるのを防ぐため 2.5 に緩和。
+        if (d > moduleSize * 2.5) {
             return;
         }
         var sizeScore = scorePattern({ x: Math.floor(x), y: Math.floor(y) }, [1, 1, 1], matrix);

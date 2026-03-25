@@ -2,7 +2,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -105,7 +104,7 @@
         </div>
     </div>
 
-    <!-- パスワード入力画面（ユーザ暗号化用） -->
+    <!-- パスワード入力画面（アプリ暗号化用） -->
     <div class="overlay-screen" id="passwordScreen">
         <div class="overlay-box">
             <h2>QRコードは暗号化されています</h2>
@@ -138,8 +137,8 @@
     <!-- 二重暗号化: 第1QR読取り後画面 -->
     <div class="overlay-screen" id="doubleEncScreen">
         <div class="overlay-box">
-            <span class="enc-badge app">🔐 ユーザ暗号化</span>
-            <h2>QRコードがユーザ暗号化されています。パスワードAは以下です。</h2>
+            <span class="enc-badge app">🔐 アプリ暗号化</span>
+            <h2>QRコードがアプリ暗号化されています。パスワードAは以下です。</h2>
             <div class="qr-data-card">
                 <label>パスワードA</label>
                 <div class="text" id="doubleEncQr1Text">-</div>
@@ -784,7 +783,7 @@
             scanStage = 3;
             if (firstQR) firstQR.points = null;
             
-            statusText.innerText = "第2QR（ユーザ暗号化）を探索中...";
+            statusText.innerText = "第2QR（アプリ暗号化）を探索中...";
             isScanning = true;
             lastDetectTime = Date.now();
             requestAnimationFrame(scanLoop);
@@ -2004,7 +2003,7 @@
                                     const b = barcodes[i];
 
                                     const bbox = b.boundingBox;
-                                    const PADDING = 50; 
+                                    const PADDING = Math.max(50, Math.floor(bbox.width * 0.5)); 
                                     const sx = Math.max(0, Math.floor(bbox.x) - PADDING);
                                     const sy = Math.max(0, Math.floor(bbox.y) - PADDING);
                                     const sw = Math.min(video.videoWidth - sx, Math.ceil(bbox.width) + PADDING * 2);
@@ -2053,7 +2052,7 @@
                                 for (let i = 0; i < barcodes.length; i++) {
                                     const b = barcodes[i];
                                     const bbox = b.boundingBox;
-                                    const PADDING = 50;
+                                    const PADDING = Math.max(80, Math.floor(bbox.width * 0.6));
                                     const sx = Math.max(0, Math.floor(bbox.x) - PADDING);
                                     const sy = Math.max(0, Math.floor(bbox.y) - PADDING);
                                     const sw = Math.min(video.videoWidth - sx, Math.ceil(bbox.width) + PADDING * 2);
@@ -2101,7 +2100,7 @@
                     // Stage 1で既にツインの座標を取得しているため、その周辺だけを探すことでフルスクリーンを回避する
                     if (detectedItems.length === 0 && scanStage === 3 && (appMask || digitalSignStage3) && lastTwinBBox) {
                         const bbox = lastTwinBBox;
-                        const PADDING = 80; // 多少のカメラ揺れを吸収するため広めに
+                        const PADDING = Math.max(80, Math.floor(bbox.width * 0.6)); // 多少のカメラ揺れを吸収するため広めに
                         const sx = Math.max(0, Math.floor(bbox.x) - PADDING);
                         const sy = Math.max(0, Math.floor(bbox.y) - PADDING);
                         const sw = Math.min(video.videoWidth - sx, Math.ceil(bbox.width) + PADDING * 2);
