@@ -386,6 +386,7 @@ function scan(matrix, options) {
                     chunks: decoded.chunks,
                     version: decoded.version,
                     managementCode: decoded.managementCode,
+                    creationDateTimeExt32: decoded.creationDateTimeExt32,
                     managementExt32: decoded.managementExt32,
                     expiryExt32: decoded.expiryExt32,
                     readerIdExt32: decoded.readerIdExt32,
