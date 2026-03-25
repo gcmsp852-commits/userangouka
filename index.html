@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -104,7 +105,7 @@
         </div>
     </div>
 
-    <!-- パスワード入力画面（アプリ暗号化用） -->
+    <!-- パスワード入力画面（ユーザ暗号化用） -->
     <div class="overlay-screen" id="passwordScreen">
         <div class="overlay-box">
             <h2>QRコードは暗号化されています</h2>
@@ -137,8 +138,8 @@
     <!-- 二重暗号化: 第1QR読取り後画面 -->
     <div class="overlay-screen" id="doubleEncScreen">
         <div class="overlay-box">
-            <span class="enc-badge app">🔐 アプリ暗号化</span>
-            <h2>QRコードがアプリ暗号化されています。パスワードAは以下です。</h2>
+            <span class="enc-badge app">🔐 ユーザ暗号化</span>
+            <h2>QRコードがユーザ暗号化されています。パスワードAは以下です。</h2>
             <div class="qr-data-card">
                 <label>パスワードA</label>
                 <div class="text" id="doubleEncQr1Text">-</div>
@@ -783,7 +784,7 @@
             scanStage = 3;
             if (firstQR) firstQR.points = null;
             
-            statusText.innerText = "第2QR（アプリ暗号化）を探索中...";
+            statusText.innerText = "第2QR（ユーザ暗号化）を探索中...";
             isScanning = true;
             lastDetectTime = Date.now();
             requestAnimationFrame(scanLoop);
